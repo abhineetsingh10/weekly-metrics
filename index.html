@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Program Metrics Dashboard</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    margin: 20px;
+  }
+
+  h2 {
+    color: #1a202c;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  h3 {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  h4 {
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    padding-left: 5px;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .program-column {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .category-cell {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 15px;
+    background: #fdfefe;
+  }
+
+  .metric-card {
+    background: #e0f2f7;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .metric-card:hover { transform: translateY(-3px); }
+
+  .metric-info { flex-grow: 1; }
+
+  .metric-title {
+    font-size: 13px;
+    color: #5a67d8;
+    margin-bottom: 2px;
+    font-weight: 500;
+  }
+
+  .metric-value {
+    font-size: 19px;
+    font-weight: 700;
+    color: #2c5282;
+    display: flex;
+    align-items: baseline;
+  }
+
+  .delta {
+    font-size: 11px;
+    margin-left: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+
+  .delta.positive { color: #38a169; }
+  .delta.negative { color: #e53e3e; }
+  .delta.no-change { color: #718096; }
+  .delta.not-available { color: #718096; font-style: italic; }
+
+  .trend-icon {
+    font-size: 16px;
+    color: #718096;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  .trend-icon:hover { background-color: #bee3f8; }
+
+  .tooltip {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #cbd5e0;
+    padding: 10px;
+    border-radius: 8px;
+    pointer-events: none;
+    display: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .tooltip svg {
+    width: 220px;
+    height: 100px;
+    display: block;
+    margin-top: 5px;
+  }
+
+  .tooltip .metric-name {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 5px;
+  }
+
+  .trend-line {
+    fill: none;
+    stroke: #3182ce;
+    stroke-width: 2px;
+  }
+
+  .dot-tooltip {
+    position: absolute;
+    background: #2d3748;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<body>
+  <h2>📊 Program Metrics Dashboard</h2>
+  <div id="dashboard" class="dashboard-grid"></div>
+  <div id="tooltip" class="tooltip"></div>
+  <div id="dot-tooltip" class="dot-tooltip" style="display:none;"></div>
+
+<script>
+d3.json("programs_weekly.json").then(data => {
+  const programs = Object.keys(data);
+  const categories = {
+    "Onboarding": ["cumulative_onboarded", "total_users"],
+    "Usage": ["avg_sessions", "avg_time", "users_2plus", "users_pro"],
+    "Progress": ["progress_users", "no_progress", "avg_progress"]
+  };
+
+  // 👇 Custom titles mapping
+  const metricTitles = {
+    avg_sessions: "Average Sessions per Week",
+    avg_time: "Average Time Spent (minutes) per Session",
+    cumulative_onboarded: "Cumulative Onboarded Students",
+    total_users: "Total Active Users",
+    users_2plus: "Users with 2+ Sessions in a week",
+    users_20min: "Users who followed protocol",
+    progress_users: "Students Making Progress",
+    no_progress: "Students with No Progress",
+    avg_progress: "Average Progress Ratio"
+  };
+
+  function formatMetricName(name) {
+    return metricTitles[name] || name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  }
+
+  const dashboard = d3.select("#dashboard");
+
+  programs.forEach(program => {
+    const col = dashboard.append("div").attr("class", "program-column");
+    col.append("h3").text(program);
+
+    Object.entries(categories).forEach(([category, metrics]) => {
+      const cell = col.append("div").attr("class", "category-cell");
+      cell.append("h4").text(category);
+
+      metrics.forEach(metric => {
+        const values = data[program].map(d => +d[metric]).filter(v => !isNaN(v));
+        const validWeeks = data[program].filter(d => !isNaN(+d[metric])).map(d => d.week);
+
+        const card = cell.append("div").attr("class", "metric-card");
+        const metricInfo = card.append("div").attr("class", "metric-info");
+        metricInfo.append("div").attr("class", "metric-title").text(formatMetricName(metric));
+        const metricValueDiv = metricInfo.append("div").attr("class", "metric-value");
+
+        if(values.length === 0) {
+          metricValueDiv.text("N/A");
+          metricValueDiv.append("span").attr("class", "delta not-available").text("N/A");
+          return;
+        }
+
+        const latest = values[values.length - 1];
+        const prev = values.length > 1 ? values[values.length - 2] : null;
+        const delta = prev !== null ? latest - prev : null;
+
+        let formattedLatest, formattedDeltaDisplay, deltaClass;
+
+        if (metric === "avg_progress") {
+            formattedLatest = d3.format(".1f")(latest) + "%";
+            formattedDeltaDisplay = delta !== null ? d3.format("+.1f")(delta) + "%" : "N/A";
+            } else if (metric === "avg_time") {
+            formattedLatest = d3.format(".1f")(latest) + " min";
+            formattedDeltaDisplay = delta !== null ? d3.format("+.1f")(delta) + " min" : "N/A";
+            } else if (metric === "avg_sessions") {
+            formattedLatest = d3.format(".2f")(latest);
+            formattedDeltaDisplay = delta !== null ? d3.format("+.2f")(delta) : "N/A";
+            } else {
+            formattedLatest = d3.format(",")(latest);
+            formattedDeltaDisplay = delta !== null ? d3.format("+,")(delta) : "N/A";
+            }
+
+        deltaClass = delta === null ? "not-available" : delta > 0 ? "positive" : delta < 0 ? "negative" : "no-change";
+
+        metricValueDiv.text(formattedLatest);
+        metricValueDiv.append("span")
+          .attr("class", `delta ${deltaClass}`)
+          .text(delta !== null ? `${delta >= 0 ? "▲" : "▼"} ${formattedDeltaDisplay}` : "N/A");
+
+        if (values.length > 1) {
+          card.append("div").attr("class", "trend-icon").text("📈")
+            .on("mouseover", (event) => showTrend(event, validWeeks, values, formatMetricName(metric)))
+            .on("mouseout", hideTrend);
+        }
+      });
+    });
+  });
+
+  const tooltip = d3.select("#tooltip");
+  const dotTooltip = d3.select("#dot-tooltip");
+
+  function showTrend(event, weeks, values, metricName) {
+    tooltip.style("display", "block")
+           .style("left", (event.pageX + 15) + "px")
+           .style("top", (event.pageY - 60) + "px")
+           .html(`<div class="metric-name">${metricName} Trend</div>`);
+
+    const svg = tooltip.append("svg")
+      .attr("width", 220)
+      .attr("height", 100);
+
+    const margin = {top: 10, right: 10, bottom: 20, left: 40};
+    const width = 220 - margin.left - margin.right;
+    const height = 100 - margin.top - margin.bottom;
+
+    const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const parseDate = d3.timeParse("%Y-%m-%d");
+    const x = d3.scaleTime()
+      .domain(d3.extent(weeks, d => parseDate(d)))
+      .range([0, width]);
+
+    const y = d3.scaleLinear()
+      .domain(d3.extent(values)).nice()
+      .range([height, 0]);
+
+    const line = d3.line()
+      .x((d, i) => x(parseDate(weeks[i])))
+      .y(d => y(d));
+
+    g.append("path")
+      .datum(values)
+      .attr("class", "trend-line")
+      .attr("d", line);
+
+    g.selectAll(".dot")
+      .data(values)
+      .enter().append("circle")
+        .attr("class", "dot")
+        .attr("cx", (d, i) => x(parseDate(weeks[i])))
+        .attr("cy", d => y(d))
+        .attr("r", 3)
+        .attr("fill", "#3182ce")
+        .on("mouseover", (event, d) => {
+          const idx = values.indexOf(d);
+          dotTooltip.style("display", "block")
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY - 20) + "px")
+            .text(`${weeks[idx]}: ${d3.format(".2f")(d)}`);
+        })
+        .on("mouseout", () => {
+          dotTooltip.style("display", "none");
+        });
+
+    g.append("g").attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).ticks(3).tickFormat(d3.timeFormat("%b %d")));
+
+    g.append("g").call(d3.axisLeft(y).ticks(3));
+  }
+
+  function hideTrend() {
+    tooltip.style("display", "none").html("");
+    dotTooltip.style("display", "none");
+  }
+});
+</script>
+</body>
