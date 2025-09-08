@@ -194,21 +194,6 @@
       "cumulative_onboarded": 3797,
       "Language": "English",
       "program": "ALL English"
-    },
-    {
-      "week": "2025-09-07",
-      "onboarded": 3,
-      "total_users": 5,
-      "avg_sessions": 2,
-      "avg_time": 3.7627,
-      "users_2plus": 2,
-      "users_pro": 0,
-      "progress_users": 0,
-      "no_progress": 5,
-      "avg_progress": 0,
-      "cumulative_onboarded": 3800,
-      "Language": "English",
-      "program": "ALL English"
     }
   ],
   "ALL Telugu": [
@@ -404,21 +389,6 @@
       "no_progress": 2413,
       "avg_progress": 5.1,
       "cumulative_onboarded": 6952,
-      "Language": "Telugu",
-      "program": "ALL Telugu"
-    },
-    {
-      "week": "2025-09-07",
-      "onboarded": 2,
-      "total_users": 5,
-      "avg_sessions": 1.4,
-      "avg_time": 10.42,
-      "users_2plus": 2,
-      "users_pro": 1,
-      "progress_users": 0,
-      "no_progress": 5,
-      "avg_progress": 0,
-      "cumulative_onboarded": 6954,
       "Language": "Telugu",
       "program": "ALL Telugu"
     }
@@ -618,21 +588,6 @@
       "cumulative_onboarded": 17770,
       "program": "AML",
       "diag_completed": 3071
-    },
-    {
-      "week": "2025-09-07",
-      "onboarded": 4,
-      "total_users": 6,
-      "avg_sessions": 1,
-      "avg_time": 9.2944,
-      "users_2plus": 0,
-      "users_pro": 1,
-      "progress_users": 0,
-      "no_progress": 5,
-      "avg_progress": 0,
-      "cumulative_onboarded": 17774,
-      "program": "AML",
-      "diag_completed": 5
     }
   ]
 }
