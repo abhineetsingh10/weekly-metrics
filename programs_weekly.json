@@ -703,21 +703,6 @@
       "avg_progress": 24.8,
       "cumulative_onboarded": 16455,
       "diag_completed": 12889
-    },
-    {
-      "week": "2025-09-14",
-      "onboarded": 82,
-      "total_users": 1095,
-      "avg_sessions": 1.0018,
-      "avg_time": 17.6736,
-      "users_2plus": 2,
-      "users_pro": 0,
-      "users_pro_with_progress": 0,
-      "progress_users": 129,
-      "no_progress": 801,
-      "avg_progress": 16.1,
-      "cumulative_onboarded": 16537,
-      "diag_completed": 13048
     }
   ]
 }
