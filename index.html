@@ -19,6 +19,14 @@
     text-align: center;
   }
 
+  .last-updated {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
   h3 {
     color: #2d3748;
     font-weight: 600;
@@ -39,9 +47,9 @@
 
   .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 25px;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
   }
 
@@ -159,12 +167,18 @@
     pointer-events: none;
   }
 
+  /* Different color schemes for different programs */
+  .program-column:nth-child(1) .metric-card { background: #e0f2f7; }
+  .program-column:nth-child(2) .metric-card { background: #f0fff4; }
+  .program-column:nth-child(3) .metric-card { background: #fef5e7; }
+
   @media (max-width: 768px) {
     .dashboard-grid { grid-template-columns: 1fr; }
   }
 </style>
 <body>
-  <h2>📊 Program Metrics Dashboard</h2>
+  <h2>Program Metrics Dashboard</h2>
+  <div id="last-updated" class="last-updated"></div>
   <div id="dashboard" class="dashboard-grid"></div>
   <div id="tooltip" class="tooltip"></div>
   <div id="dot-tooltip" class="dot-tooltip" style="display:none;"></div>
@@ -172,23 +186,67 @@
 <script>
 d3.json("programs_weekly.json").then(data => {
   const programs = Object.keys(data);
-  const categories = {
-    "Onboarding": ["cumulative_onboarded", "total_users"],
-    "Usage": ["avg_sessions", "avg_time", "users_2plus", "users_pro"],
-    "Progress": ["progress_users", "no_progress", "avg_progress"]
-  };
+  
+  // Find the latest week across all programs for last updated info
+  let latestWeek = null;
+  programs.forEach(program => {
+    if (data[program] && data[program].length > 0) {
+      const programLatestWeek = data[program][data[program].length - 1].week;
+      if (!latestWeek || new Date(programLatestWeek) > new Date(latestWeek)) {
+        latestWeek = programLatestWeek;
+      }
+    }
+  });
+  
+  // Display last updated information
+  if (latestWeek) {
+    const lastUpdatedDiv = document.getElementById('last-updated');
+    const date = new Date(latestWeek);
+    const formattedDate = date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    lastUpdatedDiv.textContent = `Last updated: Week of ${formattedDate}`;
+  }
+  
+  // Define categories with conditional metrics based on program
+  function getCategories(program) {
+    const baseCategories = {
+      "Onboarding": ["cumulative_onboarded"],
+      "Usage": ["total_users", "avg_sessions", "avg_time", "users_2plus", "users_pro"],
+      "Progress": ["progress_users", "no_progress", "avg_progress", "users_pro_with_progress"]
+    };
 
-  // 👇 Custom titles mapping
+    // Add milestone categories based on program
+    if (program === "ALL English") {
+      baseCategories["Milestones"] = ["cumulative_m6", "cumulative_m9", "cumulative_m15"];
+    } else if (program === "ALL Telugu") {
+      baseCategories["Milestones"] = ["cumulative_m6", "cumulative_m9"];
+    } else if (program === "AML") {
+      // Add diagnostics completed to onboarding for AML
+      baseCategories["Onboarding"] = ["cumulative_onboarded", "diag_completed"];
+    }
+
+    return baseCategories;
+  }
+
+  // Custom titles mapping
   const metricTitles = {
     avg_sessions: "Average Sessions per Week",
     avg_time: "Average Time Spent (minutes) per Session",
     cumulative_onboarded: "Cumulative Onboarded Students",
-    total_users: "Total Active Users",
+    total_users: "Total Weekly Active Users",
     users_2plus: "Users with 2+ Sessions in a week",
-    users_20min: "Users who followed protocol",
+    users_pro: "User Pro (2+ sessions & sufficient time)",
+    users_pro_with_progress: "User Pro with Milestone Progress",
     progress_users: "Students Making Progress",
     no_progress: "Students with No Progress",
-    avg_progress: "Average Progress Ratio"
+    avg_progress: "Average Progress Ratio",
+    cumulative_m6: "Students who crossed M6",
+    cumulative_m9: "Students who crossed M9",
+    cumulative_m15: "Students who crossed M15",
+    diag_completed: "Cumulative Diagnostics Completed"
   };
 
   function formatMetricName(name) {
@@ -198,6 +256,7 @@ d3.json("programs_weekly.json").then(data => {
   const dashboard = d3.select("#dashboard");
 
   programs.forEach(program => {
+    const categories = getCategories(program);
     const col = dashboard.append("div").attr("class", "program-column");
     col.append("h3").text(program);
 
@@ -206,8 +265,13 @@ d3.json("programs_weekly.json").then(data => {
       cell.append("h4").text(category);
 
       metrics.forEach(metric => {
-        const values = data[program].map(d => +d[metric]).filter(v => !isNaN(v));
-        const validWeeks = data[program].filter(d => !isNaN(+d[metric])).map(d => d.week);
+        // Skip metrics that don't exist in the data
+        if (!data[program] || !data[program][0] || data[program][0][metric] === undefined) {
+          return;
+        }
+
+        const values = data[program].map(d => d[metric] !== null && d[metric] !== undefined ? +d[metric] : null).filter(v => v !== null && !isNaN(v));
+        const validWeeks = data[program].filter(d => d[metric] !== null && d[metric] !== undefined && !isNaN(+d[metric])).map(d => d.week);
 
         const card = cell.append("div").attr("class", "metric-card");
         const metricInfo = card.append("div").attr("class", "metric-info");
@@ -229,16 +293,16 @@ d3.json("programs_weekly.json").then(data => {
         if (metric === "avg_progress") {
             formattedLatest = d3.format(".1f")(latest) + "%";
             formattedDeltaDisplay = delta !== null ? d3.format("+.1f")(delta) + "%" : "N/A";
-            } else if (metric === "avg_time") {
+        } else if (metric === "avg_time") {
             formattedLatest = d3.format(".1f")(latest) + " min";
             formattedDeltaDisplay = delta !== null ? d3.format("+.1f")(delta) + " min" : "N/A";
-            } else if (metric === "avg_sessions") {
+        } else if (metric === "avg_sessions") {
             formattedLatest = d3.format(".2f")(latest);
             formattedDeltaDisplay = delta !== null ? d3.format("+.2f")(delta) : "N/A";
-            } else {
+        } else {
             formattedLatest = d3.format(",")(latest);
             formattedDeltaDisplay = delta !== null ? d3.format("+,")(delta) : "N/A";
-            }
+        }
 
         deltaClass = delta === null ? "not-available" : delta > 0 ? "positive" : delta < 0 ? "negative" : "no-change";
 
@@ -325,3 +389,4 @@ d3.json("programs_weekly.json").then(data => {
 });
 </script>
 </body>
+</html>
