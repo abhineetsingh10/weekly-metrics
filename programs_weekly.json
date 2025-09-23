@@ -13,6 +13,7 @@
       "no_progress": 10,
       "avg_progress": 0,
       "cumulative_onboarded": 10,
+      "cumulative_progress_users": 0,
       "cumulative_m6": 3,
       "cumulative_m9": 0,
       "Language": "Telugu"
@@ -30,6 +31,7 @@
       "no_progress": 148,
       "avg_progress": 10.8,
       "cumulative_onboarded": 171,
+      "cumulative_progress_users": 16,
       "cumulative_m6": 36,
       "cumulative_m9": 3,
       "Language": "Telugu"
@@ -47,6 +49,7 @@
       "no_progress": 568,
       "avg_progress": 3.2,
       "cumulative_onboarded": 688,
+      "cumulative_progress_users": 30,
       "cumulative_m6": 82,
       "cumulative_m9": 10,
       "Language": "Telugu"
@@ -64,6 +67,7 @@
       "no_progress": 1138,
       "avg_progress": 3.3,
       "cumulative_onboarded": 1571,
+      "cumulative_progress_users": 63,
       "cumulative_m6": 120,
       "cumulative_m9": 16,
       "Language": "Telugu"
@@ -81,6 +85,7 @@
       "no_progress": 1358,
       "avg_progress": 3.9,
       "cumulative_onboarded": 2252,
+      "cumulative_progress_users": 103,
       "cumulative_m6": 161,
       "cumulative_m9": 22,
       "Language": "Telugu"
@@ -98,6 +103,7 @@
       "no_progress": 2245,
       "avg_progress": 5.5,
       "cumulative_onboarded": 3446,
+      "cumulative_progress_users": 200,
       "cumulative_m6": 226,
       "cumulative_m9": 25,
       "Language": "Telugu"
@@ -115,6 +121,7 @@
       "no_progress": 1693,
       "avg_progress": 4.3,
       "cumulative_onboarded": 3963,
+      "cumulative_progress_users": 252,
       "cumulative_m6": 259,
       "cumulative_m9": 29,
       "Language": "Telugu"
@@ -132,6 +139,7 @@
       "no_progress": 2224,
       "avg_progress": 5,
       "cumulative_onboarded": 4663,
+      "cumulative_progress_users": 329,
       "cumulative_m6": 296,
       "cumulative_m9": 32,
       "Language": "Telugu"
@@ -149,6 +157,7 @@
       "no_progress": 2183,
       "avg_progress": 4.5,
       "cumulative_onboarded": 5157,
+      "cumulative_progress_users": 404,
       "cumulative_m6": 334,
       "cumulative_m9": 34,
       "Language": "Telugu"
@@ -166,6 +175,7 @@
       "no_progress": 1376,
       "avg_progress": 4.7,
       "cumulative_onboarded": 5417,
+      "cumulative_progress_users": 447,
       "cumulative_m6": 351,
       "cumulative_m9": 37,
       "Language": "Telugu"
@@ -183,6 +193,7 @@
       "no_progress": 2256,
       "avg_progress": 5.7,
       "cumulative_onboarded": 5936,
+      "cumulative_progress_users": 531,
       "cumulative_m6": 399,
       "cumulative_m9": 41,
       "Language": "Telugu"
@@ -200,6 +211,7 @@
       "no_progress": 2261,
       "avg_progress": 5.5,
       "cumulative_onboarded": 6456,
+      "cumulative_progress_users": 613,
       "cumulative_m6": 444,
       "cumulative_m9": 46,
       "Language": "Telugu"
@@ -217,6 +229,7 @@
       "no_progress": 2413,
       "avg_progress": 5.1,
       "cumulative_onboarded": 6952,
+      "cumulative_progress_users": 697,
       "cumulative_m6": 479,
       "cumulative_m9": 53,
       "Language": "Telugu"
@@ -234,6 +247,7 @@
       "no_progress": 2698,
       "avg_progress": 4.3,
       "cumulative_onboarded": 7429,
+      "cumulative_progress_users": 768,
       "cumulative_m6": 509,
       "cumulative_m9": 60,
       "Language": "Telugu"
@@ -251,6 +265,7 @@
       "no_progress": 2728,
       "avg_progress": 4.7,
       "cumulative_onboarded": 7864,
+      "cumulative_progress_users": 845,
       "cumulative_m6": 563,
       "cumulative_m9": 63,
       "Language": "Telugu"
@@ -270,6 +285,7 @@
       "no_progress": 13,
       "avg_progress": 7.7,
       "cumulative_onboarded": 14,
+      "cumulative_progress_users": 1,
       "cumulative_m6": 4,
       "cumulative_m9": 1,
       "Language": "English",
@@ -288,6 +304,7 @@
       "no_progress": 65,
       "avg_progress": 32.3,
       "cumulative_onboarded": 94,
+      "cumulative_progress_users": 21,
       "cumulative_m6": 27,
       "cumulative_m9": 17,
       "Language": "English",
@@ -306,6 +323,7 @@
       "no_progress": 324,
       "avg_progress": 21.3,
       "cumulative_onboarded": 446,
+      "cumulative_progress_users": 83,
       "cumulative_m6": 54,
       "cumulative_m9": 32,
       "Language": "English",
@@ -324,6 +342,7 @@
       "no_progress": 461,
       "avg_progress": 28,
       "cumulative_onboarded": 825,
+      "cumulative_progress_users": 195,
       "cumulative_m6": 72,
       "cumulative_m9": 42,
       "Language": "English",
@@ -342,6 +361,7 @@
       "no_progress": 599,
       "avg_progress": 23.2,
       "cumulative_onboarded": 1153,
+      "cumulative_progress_users": 294,
       "cumulative_m6": 112,
       "cumulative_m9": 60,
       "Language": "English",
@@ -360,6 +380,7 @@
       "no_progress": 855,
       "avg_progress": 27.4,
       "cumulative_onboarded": 1665,
+      "cumulative_progress_users": 459,
       "cumulative_m6": 146,
       "cumulative_m9": 84,
       "Language": "English",
@@ -378,6 +399,7 @@
       "no_progress": 645,
       "avg_progress": 23.4,
       "cumulative_onboarded": 1955,
+      "cumulative_progress_users": 560,
       "cumulative_m6": 168,
       "cumulative_m9": 93,
       "Language": "English",
@@ -396,6 +418,7 @@
       "no_progress": 901,
       "avg_progress": 22.2,
       "cumulative_onboarded": 2370,
+      "cumulative_progress_users": 690,
       "cumulative_m6": 206,
       "cumulative_m9": 116,
       "Language": "English",
@@ -414,6 +437,7 @@
       "no_progress": 717,
       "avg_progress": 20.4,
       "cumulative_onboarded": 2602,
+      "cumulative_progress_users": 781,
       "cumulative_m6": 223,
       "cumulative_m9": 126,
       "Language": "English",
@@ -432,6 +456,7 @@
       "no_progress": 562,
       "avg_progress": 19.4,
       "cumulative_onboarded": 2765,
+      "cumulative_progress_users": 832,
       "cumulative_m6": 242,
       "cumulative_m9": 135,
       "Language": "English",
@@ -450,6 +475,7 @@
       "no_progress": 925,
       "avg_progress": 23.2,
       "cumulative_onboarded": 3020,
+      "cumulative_progress_users": 958,
       "cumulative_m6": 275,
       "cumulative_m9": 155,
       "Language": "English",
@@ -468,6 +494,7 @@
       "no_progress": 1035,
       "avg_progress": 19.2,
       "cumulative_onboarded": 3413,
+      "cumulative_progress_users": 1076,
       "cumulative_m6": 308,
       "cumulative_m9": 174,
       "Language": "English",
@@ -486,6 +513,7 @@
       "no_progress": 1084,
       "avg_progress": 19.9,
       "cumulative_onboarded": 3797,
+      "cumulative_progress_users": 1223,
       "cumulative_m6": 333,
       "cumulative_m9": 189,
       "Language": "English",
@@ -504,6 +532,7 @@
       "no_progress": 1153,
       "avg_progress": 18.5,
       "cumulative_onboarded": 4179,
+      "cumulative_progress_users": 1374,
       "cumulative_m6": 359,
       "cumulative_m9": 207,
       "Language": "English",
@@ -522,6 +551,7 @@
       "no_progress": 1215,
       "avg_progress": 19.6,
       "cumulative_onboarded": 4526,
+      "cumulative_progress_users": 1534,
       "cumulative_m6": 399,
       "cumulative_m9": 217,
       "Language": "English",
@@ -542,6 +572,7 @@
       "no_progress": 34,
       "avg_progress": 71.4,
       "cumulative_onboarded": 134,
+      "cumulative_progress_users": 85,
       "users_with_progress_data": 119,
       "users_without_progress_data": 15,
       "diag_completed": 134
@@ -559,6 +590,7 @@
       "no_progress": 132,
       "avg_progress": 68,
       "cumulative_onboarded": 489,
+      "cumulative_progress_users": 292,
       "users_with_progress_data": 412,
       "users_without_progress_data": 48,
       "diag_completed": 489
@@ -576,6 +608,7 @@
       "no_progress": 194,
       "avg_progress": 70.1,
       "cumulative_onboarded": 945,
+      "cumulative_progress_users": 496,
       "users_with_progress_data": 649,
       "users_without_progress_data": 185,
       "diag_completed": 945
@@ -593,6 +626,7 @@
       "no_progress": 590,
       "avg_progress": 67.3,
       "cumulative_onboarded": 3214,
+      "cumulative_progress_users": 1312,
       "users_with_progress_data": 1804,
       "users_without_progress_data": 1131,
       "diag_completed": 3214
@@ -610,6 +644,7 @@
       "no_progress": 730,
       "avg_progress": 67.3,
       "cumulative_onboarded": 5992,
+      "cumulative_progress_users": 1844,
       "users_with_progress_data": 2231,
       "users_without_progress_data": 2413,
       "diag_completed": 5991
@@ -627,6 +662,7 @@
       "no_progress": 554,
       "avg_progress": 68.5,
       "cumulative_onboarded": 6925,
+      "cumulative_progress_users": 2046,
       "users_with_progress_data": 1760,
       "users_without_progress_data": 1182,
       "diag_completed": 6924
@@ -644,6 +680,7 @@
       "no_progress": 580,
       "avg_progress": 68.8,
       "cumulative_onboarded": 7773,
+      "cumulative_progress_users": 2198,
       "users_with_progress_data": 1861,
       "users_without_progress_data": 1263,
       "diag_completed": 7772
@@ -661,6 +698,7 @@
       "no_progress": 186,
       "avg_progress": 71.3,
       "cumulative_onboarded": 7961,
+      "cumulative_progress_users": 2245,
       "users_with_progress_data": 647,
       "users_without_progress_data": 284,
       "diag_completed": 7960
@@ -678,6 +716,7 @@
       "no_progress": 120,
       "avg_progress": 72.2,
       "cumulative_onboarded": 8120,
+      "cumulative_progress_users": 2289,
       "users_with_progress_data": 432,
       "users_without_progress_data": 211,
       "diag_completed": 8119
@@ -695,6 +734,7 @@
       "no_progress": 52,
       "avg_progress": 68.7,
       "cumulative_onboarded": 8248,
+      "cumulative_progress_users": 2330,
       "users_with_progress_data": 166,
       "users_without_progress_data": 101,
       "diag_completed": 8247
@@ -712,6 +752,7 @@
       "no_progress": 140,
       "avg_progress": 67.3,
       "cumulative_onboarded": 8536,
+      "cumulative_progress_users": 2416,
       "users_with_progress_data": 428,
       "users_without_progress_data": 230,
       "diag_completed": 8535
@@ -729,6 +770,7 @@
       "no_progress": 117,
       "avg_progress": 71,
       "cumulative_onboarded": 8718,
+      "cumulative_progress_users": 2461,
       "users_with_progress_data": 404,
       "users_without_progress_data": 222,
       "diag_completed": 8717
@@ -746,6 +788,7 @@
       "no_progress": 63,
       "avg_progress": 65.6,
       "cumulative_onboarded": 8805,
+      "cumulative_progress_users": 2464,
       "users_with_progress_data": 183,
       "users_without_progress_data": 130,
       "diag_completed": 8804
@@ -763,6 +806,7 @@
       "no_progress": 23,
       "avg_progress": 69.7,
       "cumulative_onboarded": 8826,
+      "cumulative_progress_users": 2470,
       "users_with_progress_data": 76,
       "users_without_progress_data": 19,
       "diag_completed": 8825
@@ -780,6 +824,7 @@
       "no_progress": 16,
       "avg_progress": 70.4,
       "cumulative_onboarded": 8833,
+      "cumulative_progress_users": 2472,
       "users_with_progress_data": 54,
       "users_without_progress_data": 6,
       "diag_completed": 8832
@@ -797,6 +842,7 @@
       "no_progress": 5,
       "avg_progress": 81.5,
       "cumulative_onboarded": 8834,
+      "cumulative_progress_users": 2473,
       "users_with_progress_data": 27,
       "users_without_progress_data": 6,
       "diag_completed": 8833
@@ -814,6 +860,7 @@
       "no_progress": 47,
       "avg_progress": 69.5,
       "cumulative_onboarded": 8896,
+      "cumulative_progress_users": 2491,
       "users_with_progress_data": 154,
       "users_without_progress_data": 60,
       "diag_completed": 8895
@@ -831,6 +878,7 @@
       "no_progress": 253,
       "avg_progress": 66.4,
       "cumulative_onboarded": 9364,
+      "cumulative_progress_users": 2645,
       "users_with_progress_data": 752,
       "users_without_progress_data": 328,
       "diag_completed": 9363
@@ -848,6 +896,7 @@
       "no_progress": 504,
       "avg_progress": 66.4,
       "cumulative_onboarded": 10321,
+      "cumulative_progress_users": 2979,
       "users_with_progress_data": 1500,
       "users_without_progress_data": 637,
       "diag_completed": 10320
@@ -865,6 +914,7 @@
       "no_progress": 527,
       "avg_progress": 68.5,
       "cumulative_onboarded": 11049,
+      "cumulative_progress_users": 3228,
       "users_with_progress_data": 1675,
       "users_without_progress_data": 699,
       "diag_completed": 11048
@@ -882,6 +932,7 @@
       "no_progress": 732,
       "avg_progress": 69.3,
       "cumulative_onboarded": 12346,
+      "cumulative_progress_users": 3604,
       "users_with_progress_data": 2384,
       "users_without_progress_data": 1248,
       "diag_completed": 12345
@@ -899,6 +950,7 @@
       "no_progress": 559,
       "avg_progress": 69.6,
       "cumulative_onboarded": 13031,
+      "cumulative_progress_users": 3821,
       "users_with_progress_data": 1839,
       "users_without_progress_data": 696,
       "diag_completed": 13030
@@ -916,6 +968,7 @@
       "no_progress": 782,
       "avg_progress": 69.1,
       "cumulative_onboarded": 13977,
+      "cumulative_progress_users": 4046,
       "users_with_progress_data": 2532,
       "users_without_progress_data": 1174,
       "diag_completed": 13976
@@ -933,6 +986,7 @@
       "no_progress": 669,
       "avg_progress": 68.8,
       "cumulative_onboarded": 14669,
+      "cumulative_progress_users": 4189,
       "users_with_progress_data": 2145,
       "users_without_progress_data": 977,
       "diag_completed": 14668
@@ -950,6 +1004,7 @@
       "no_progress": 474,
       "avg_progress": 69.1,
       "cumulative_onboarded": 15129,
+      "cumulative_progress_users": 4296,
       "users_with_progress_data": 1534,
       "users_without_progress_data": 623,
       "diag_completed": 15128
@@ -967,6 +1022,7 @@
       "no_progress": 734,
       "avg_progress": 67.3,
       "cumulative_onboarded": 15865,
+      "cumulative_progress_users": 4395,
       "users_with_progress_data": 2245,
       "users_without_progress_data": 1200,
       "diag_completed": 15864
@@ -984,6 +1040,7 @@
       "no_progress": 672,
       "avg_progress": 68,
       "cumulative_onboarded": 16479,
+      "cumulative_progress_users": 4470,
       "users_with_progress_data": 2103,
       "users_without_progress_data": 1140,
       "diag_completed": 16478
@@ -1001,6 +1058,7 @@
       "no_progress": 599,
       "avg_progress": 68.4,
       "cumulative_onboarded": 16976,
+      "cumulative_progress_users": 4508,
       "users_with_progress_data": 1894,
       "users_without_progress_data": 1068,
       "diag_completed": 16974
@@ -1018,6 +1076,7 @@
       "no_progress": 695,
       "avg_progress": 68.5,
       "cumulative_onboarded": 17762,
+      "cumulative_progress_users": 4630,
       "users_with_progress_data": 2209,
       "users_without_progress_data": 1576,
       "diag_completed": 17674
@@ -1035,6 +1094,7 @@
       "no_progress": 874,
       "avg_progress": 69.5,
       "cumulative_onboarded": 18738,
+      "cumulative_progress_users": 4763,
       "users_with_progress_data": 2861,
       "users_without_progress_data": 2267,
       "diag_completed": 18528
