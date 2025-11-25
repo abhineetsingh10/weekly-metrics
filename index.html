@@ -187,6 +187,21 @@
 d3.json("programs_weekly.json").then(data => {
   const programs = Object.keys(data);
   
+// Create derived metrics (convert minutes → hours)
+programs.forEach(program => {
+  data[program].forEach(d => {
+
+    if (d.time_spent_change !== undefined && d.time_spent_change !== null) {
+      d.time_spent_change_hours = Math.round((d.time_spent_change / 60) * 10) / 10;
+    }
+
+    if (d.cumulative_time_spent !== undefined && d.cumulative_time_spent !== null) {
+      d.cumulative_time_spent_hours = Math.round((d.cumulative_time_spent / 60) * 10) / 10;
+    }
+
+  });
+});
+
   // Find the latest week across all programs for last updated info
   let latestWeek = null;
   programs.forEach(program => {
@@ -212,18 +227,46 @@ d3.json("programs_weekly.json").then(data => {
   
   // Define categories with conditional metrics based on program
   function getCategories(program) {
+  // Common categories across all programs
   const baseCategories = {
     "Onboarding": ["cumulative_onboarded", "cumulative_progress_users"],
-    "Usage": ["total_users", "avg_sessions", "avg_time", "users_2plus", "users_pro"],
-    "Progress": ["progress_users", "no_progress", "avg_progress", "users_pro_with_progress"]
+    "Usage": [
+      "total_users",
+      "avg_sessions",        // <-- added
+      "avg_time",            // <-- added
+      "users_2plus",
+      "users_pro",
+      "time_spent_change_hours"
+    ]
   };
 
-  // Add milestone categories based on program
+if (program === "ALL-English") {
+    baseCategories["Progress"] = ["progress_users",
+      "no_progress",
+      "avg_progress",
+      "users_pro_with_progress"];
+  } else if (program === "ALL-Telugu") {
+    baseCategories["Progress"] = ["progress_users",
+      "no_progress",
+      "avg_progress",
+      "users_pro_with_progress"];
+  }
+
+  // Add milestone categories for ALL programs
   if (program === "ALL-English") {
     baseCategories["Milestones"] = ["cumulative_m6", "cumulative_m9", "cumulative_m15"];
   } else if (program === "ALL-Telugu") {
     baseCategories["Milestones"] = ["cumulative_m6", "cumulative_m9"];
   }
+
+  // AML-specific metrics
+  if (program === "AML") {
+  baseCategories["Accuracy & Questions"] = [
+    "weekly_qs_attempted",
+    "weekly_qs_correct",
+    "weekly_accuracy",
+  ];
+}
 
   return baseCategories;
 }
@@ -243,7 +286,9 @@ d3.json("programs_weekly.json").then(data => {
   cumulative_m6: "Students who crossed M6",
   cumulative_m9: "Students who crossed M9",
   cumulative_m15: "Students who crossed M15",
-  cumulative_progress_users: "Cumulative Progress"
+  cumulative_progress_users: "Cumulative Progress",
+  cumulative_time_spent_hours: "Total Time Spent (Hours)",
+time_spent_change_hours: "Time Spent in the Week (Hours)"
 };
 
   function formatMetricName(name) {
@@ -263,9 +308,11 @@ d3.json("programs_weekly.json").then(data => {
 
       metrics.forEach(metric => {
         // Skip metrics that don't exist in the data
-        if (!data[program] || !data[program][0] || data[program][0][metric] === undefined) {
-          return;
-        }
+        const metricExists = data[program].some(d => d[metric] !== undefined && d[metric] !== null);
+
+if (!metricExists) {
+  return;
+}
 
         const values = data[program].map(d => d[metric] !== null && d[metric] !== undefined ? +d[metric] : null).filter(v => v !== null && !isNaN(v));
         const validWeeks = data[program].filter(d => d[metric] !== null && d[metric] !== undefined && !isNaN(+d[metric])).map(d => d.week);
